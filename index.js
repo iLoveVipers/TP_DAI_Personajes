@@ -16,7 +16,7 @@ async function test_getAll(){
     data = await svc.getAll();
     console.log(data);  //muestro todas las pizzas
 
-    console.log(data[0].Id);
+ //   console.log(data[0].Id);
     //console.log(data[0].id);
     //console.log(data[0].Id);
 }
