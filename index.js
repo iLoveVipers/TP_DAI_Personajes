@@ -1,24 +1,43 @@
 import PersonajesService from './src/service/personajes-services.js'
+import PeliserieService from './src/service/peliserie-services.js'
 import Personaje from './src/models/personaje.js'
 import Peli_Serie from './src/models/personaje.js'
 
 
-await test_getAll();
-//await test_getById();
-//await test_insert();
-//await test_update();
-//await test_deleteById();
+//await test_getAllPer();
+await test_getByIdPer();
+//await test_insertPer();
+//await test_updatePer();
+//await test_deleteByIdPer();
+//await test_getAllPeSe();
+//await test_getByIdPeSe();
+//await test_insertPeSe();
+//await test_updatePeSe();
+//await test_deleteByIdPeSe();
 
-async function test_getAll(){
+/*async function test_getAllPer(){
     let svc = new PersonajesService();
     let data;
 
-    data = await svc.getAll();
-    console.log(data);  //muestro todas las pizzas
+    data = await svc.getAllPer();
+    console.log(data);  
+}*/
 
- //   console.log(data[0].Id);
-    //console.log(data[0].id);
-    //console.log(data[0].Id);
+/*async function test_getAllPeSe(){
+    let svc = new PeliserieService();
+    let data;
+
+    data = await svc.getAllPeSe();
+    console.log(data);  
+}*/
+
+async function test_getByIdPer(){
+    let svc = new PersonajesService();
+    let data;
+
+    data = await svc.getByIdPer(2);
+    console.log(data);  
 }
+
 
 process.exit();

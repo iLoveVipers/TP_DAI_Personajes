@@ -2,9 +2,9 @@ import config from '../../dbconfig.js';
 import sql from 'mssql';
 
 class PersonajeService {
-    getAll = async () => {
+    getAllPer = async () => {
         let returnArray = null;
-        console.log('Estoy en: PeronajeService.getAll()');
+        console.log('Estoy en: PersonajeService.getAll()');
         try {
             let pool   = await sql.connect(config);
             let result = await pool.request().query("SELECT * from Personaje");
@@ -18,7 +18,7 @@ class PersonajeService {
 
 
     
-    getById = async (id) => {
+    getByIdPer = async (id) => {
         let returnEntity = null;
         console.log('Estoy en: PersonajeService.getById(id)');
         try {
@@ -33,7 +33,7 @@ class PersonajeService {
         return returnEntity;
     }
 
-    insert = async (personaje) => {
+    insertPer = async (personaje) => {
         let rowsAffected = 0;
         console.log('Estoy en: PersonajeService.insert(personaje)');
 
@@ -53,7 +53,7 @@ class PersonajeService {
         return rowsAffected;
     }
 
-    update = async (personaje) => {
+    updatePer = async (personaje) => {
         let rowsAffected = 0;
         console.log('Estoy en: PersonajeService.update(personaje)');
 
@@ -74,7 +74,7 @@ class PersonajeService {
         return rowsAffected;
     }
     
-    deleteById = async (id) => {
+    deleteByIdPer = async (id) => {
         let rowsAffected = 0;
         console.log('Estoy en: PersonajeService.deleteById(id)');
         try {
