@@ -25,7 +25,7 @@ class PersonajeService {
             let pool   = await sql.connect(config);
             let result = await pool.request()
                                 .input('pId', sql.Int, id)
-                                .query('SELECT * FROM Personaje WHERE id = @pId');
+                                .query('SELECT * FROM Personaje JOIN Personaje_Peliserie ON Personaje.Id = Personaje_Peliserie.fk_IdPersonaje LEFT JOIN Peliserie ON Peliserie.Id = Personaje_Peliserie.fk_IdPeliSerie WHERE Personaje.Id = @pId');
             returnEntity = result.recordsets[0][0];
         } catch (error) {
             console.log(error);
@@ -88,6 +88,38 @@ class PersonajeService {
         }
         return rowsAffected;
     }
+
+    getByNombrePer = async (nombre, edad) => {
+        let returnEntity = null;
+        console.log('Estoy en: PersonajeService.getBynombre(nombre,edad)');
+        try {
+            let pool   = await sql.connect(config);
+            let result = await pool.request()
+                                .input('pNombre', sql.VarChar, nombre)
+                                .input('pEdad', sql.Int, edad)
+                                .query('SELECT * FROM Personaje WHERE nombre = @pNombre AND  edad = @pEdad');
+            returnEntity = result.recordsets[0][0];
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+/*
+    getDetallePer = async (id) => {
+        let returnEntity = null;
+        console.log('Estoy en: PersonajeService.getDetallePer(id)');
+        try {
+            let pool   = await sql.connect(config);
+            let result = await pool.request()
+                                .input('pId', sql.Int, id)
+                                .query('SELECT * FROM Personaje WHERE id = @pId INNER JOIN PeliSerie ON Personaje.Id ');
+            returnEntity = result.recordsets[0][0];
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+*/
 
 
 }

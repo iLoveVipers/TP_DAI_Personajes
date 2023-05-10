@@ -81,7 +81,7 @@ class PeliserieService {
             let pool   = await sql.connect(config);
             let result = await pool.request()
                                 .input('pId', sql.Int, id)
-                                .query('DELETE FROM Peliseries WHERE id = @pId');
+                                .query('DELETE FROM Peliserie WHERE id = @pId');
             rowsAffected = result.rowsAffected;
         } catch (error) {
             console.log(error);
@@ -89,6 +89,22 @@ class PeliserieService {
         return rowsAffected;
     }
 
+    
+    getByTituloPeSe = async (titulo, fecha) => {
+        let returnEntity = null;
+        console.log('Estoy en: PeliserieService.getByTitulo(titulo, fecha)');
+        try {
+            let pool   = await sql.connect(config);
+            let result = await pool.request()
+                                .input('pTitulo', sql.VarChar, titulo)
+                                .input('pFecha_Creacion', sql.Date, fecha)
+                                .query('SELECT * FROM Peliserie WHERE Titulo = @pTitulo AND  Fecha_Creacion = @pFecha_Creacion');
+            returnEntity = result.recordsets[0][0];
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
 
 }
 
