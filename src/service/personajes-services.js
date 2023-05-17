@@ -45,9 +45,10 @@ class PersonajeService {
                 .input('pEdad'    , sql.Float , personaje?.edad ?? 0)
                 .input('pPeso'    , sql.Float , personaje?.peso ?? 0)
                 .input('pHistoria', sql.NChar , personaje?.historia ?? '')
-                .query(`INSERT INTO Personaje (Imagen, Nombre, Edad, Peso, Historia) VALUES (@pImagen, @pNombre, @pEdad, @pPeso, @pHistoria)`);
+                .query(`INSERT INTO Personaje (Imagen, Nombre, Edad, Peso, Historia) VALUES (@pImagen = 'NULL', @pNombre = 'EQUIS', @pEdad = 18 , @pPeso = 55, @pHistoria = 'BLA BLA BLA')`);
             rowsAffected = result.rowsAffected;
         } catch (error) {
+
             console.log(error);
         }
         return rowsAffected;

@@ -1,65 +1,141 @@
 import PersonajeService from './src/service/personajes-services.js'
+
 import PeliserieService from './src/service/peliserie-services.js'
+
 import Personaje from './src/models/personaje.js'
+
 import Peli_Serie from './src/models/peli_serie.js'
+
 import sql from 'mssql'
+
 import express from 'express'
 
+ 
+
 const app = express ();
-const port = 3100;
 
-//await test_getAllPer();
-//await test_getByIdPer();
-//await test_insertPer();
-//await test_updatePer();
-//await test_deleteByIdPer();
-//await test_getAllPeSe();
-//await test_getByIdPeSe();
-//await test_insertPeSe();
-//await test_updatePeSe();
-//await test_deleteByIdPeSe();
-//await test_getByNombrePer();
-//await test_getByTituloPeSe();
 
-/*async function test_getAllPer(){
-    let svc = new PersonajesService();
-    let data;
+ 
 
-    data = await svc.getAllPer();
-    console.log(data);  
-}*/
+app.get('/', function(req, res) {
 
-/*async function test_getAllPeSe(){
-    let svc = new PeliserieService();
-    let data;
+    res.send('Soy la Home Page!');
 
-    data = await svc.getAllPeSe();
-    console.log(data);  
-}*/
-
-/*async function test_getByNombrePer(){
-    let svc = new PersonajeService();
-    let data;
-
-    data = await svc.getByNombrePer('Aurora', 16 );
-    console.log(data);  
-} */
-
-/*app.get('/personaje', async function (req, res) {
-
-    const newPS = new PersonajeService()
-    res.send(await newPS.getAllPer(
-
-    ))
-});*/
-
-app.get("/home", function (req, res) {
-    res.send("hola")
 })
 
-app.listen(port, () => {
 
-    console.log(`Escuchando el port ${port}`)
+ 
+
+app.get('/personajes', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.getAllPer())
+
+})
+
+app.get('/personaje/:id', async function(req, res) {
+
+    const newPS = new PersonajeService();
+    let id = req.params.id;
+    res.send(await newPS.getByIdPer(id))
+
+})
+
+app.get('/personaje/:nombre- :edad', async function(req, res) {
+
+    const newPS = new PersonajeService();
+    let nombre = req.params.nombre;
+    let edad = req.params.edad;
+    res.send(await newPS.getByNombrePer(nombre, edad))
+
+})
+
+app.get('/instert-pj', async function(req, res) {
+
+    const newPS = new PersonajeService();
+    
+    res.send(await newPS.insertPer(Personaje))
+
+})
+
+app.get('/update-pj/:id', async function(req, res) {
+
+    const newPS = new PersonajeService();
+    let id =req.params.id;
+    res.send(await newPS.updatePer(id))
+
+})
+
+app.get('/delete-pj', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.deleteByIdPer())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.getAllPeSe())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.getByIdPeSe())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.insertPeSe())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.updatePeSe())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.deleteByIdPeSe())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.getByNombrePer())
+
+})
+
+app.get('/personaje', async function(req, res) {
+
+    const newPS = new PersonajeService();
+
+    res.send(await newPS.getByTituloPeSe())
+
+})
+
+
+// Iniciamos el servidor
+
+app.listen(3000, function() {
+
+    console.log('Example app listening on port 3000!');
+
 });
-
-process.exit();
