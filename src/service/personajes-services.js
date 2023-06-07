@@ -54,7 +54,7 @@ class PersonajeService {
         return rowsAffected;
     }
 
-    updatePer = async (personaje) => {
+    updatePer = async (id) => {
         let rowsAffected = 0;
         console.log('Estoy en: PersonajeService.update(personaje)');
 
@@ -90,15 +90,14 @@ class PersonajeService {
         return rowsAffected;
     }
 
-    getByNombrePer = async (nombre, edad) => {
+    getByNombrePer = async (nombre) => {
         let returnEntity = null;
-        console.log('Estoy en: PersonajeService.getBynombre(nombre,edad)');
+        console.log('Estoy en: PersonajeService.getBynombre(nombre)');
         try {
             let pool   = await sql.connect(config);
             let result = await pool.request()
                                 .input('pNombre', sql.VarChar, nombre)
-                                .input('pEdad', sql.Int, edad)
-                                .query('SELECT * FROM Personaje WHERE nombre = @pNombre AND  edad = @pEdad');
+                                .query('SELECT * FROM Personaje WHERE nombre = @pNombre');
             returnEntity = result.recordsets[0][0];
         } catch (error) {
             console.log(error);

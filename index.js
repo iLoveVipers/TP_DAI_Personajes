@@ -9,6 +9,7 @@ import Peli_Serie from './src/models/peli_serie.js'
 import sql from 'mssql'
 
 import express from 'express'
+import e from 'express'
 
  
 
@@ -26,7 +27,7 @@ app.get('/', function(req, res) {
 
  
 
-app.get('/personajes', async function(req, res) {
+app.get('/personaje', async function(req, res) {
 
     const newPS = new PersonajeService();
 
@@ -42,20 +43,19 @@ app.get('/personaje/:id', async function(req, res) {
 
 })
 
-app.get('/personaje/:nombre- :edad', async function(req, res) {
+app.get('/personaje/nombre/:nombre', async function(req, res) {
 
     const newPS = new PersonajeService();
     let nombre = req.params.nombre;
-    let edad = req.params.edad;
-    res.send(await newPS.getByNombrePer(nombre, edad))
+    res.send(await newPS.getByNombrePer(nombre))
 
 })
 
-app.get('/instert-pj', async function(req, res) {
+app.get('/instert-pj/:imagen/:nombre/:edad/:peso/:historia', async function(req, res) {
 
     const newPS = new PersonajeService();
-    
-    res.send(await newPS.insertPer(Personaje))
+    const newPer = {imagen:req.params.imagen, nombre:req.params.nombre, edad:req.params.edad, peso:req.params.peso, historia:req.params.historia,}
+    res.send(await newPS.insertPer(newPer))
 
 })
 
@@ -67,67 +67,52 @@ app.get('/update-pj/:id', async function(req, res) {
 
 })
 
-app.get('/delete-pj', async function(req, res) {
+app.get('/delete-pj/:id', async function(req, res) {
 
     const newPS = new PersonajeService();
-
-    res.send(await newPS.deleteByIdPer())
+    let id =req.params.id;
+    res.send(await newPS.deleteByIdPer(id))
 
 })
 
-app.get('/personaje', async function(req, res) {
+app.get('/peliserie', async function(req, res) {
 
-    const newPS = new PersonajeService();
+    const newPS = new PeliserieService();
 
     res.send(await newPS.getAllPeSe())
 
 })
 
-app.get('/personaje', async function(req, res) {
+app.get('/peliserie/:id', async function(req, res) {
 
-    const newPS = new PersonajeService();
-
-    res.send(await newPS.getByIdPeSe())
-
-})
-
-app.get('/personaje', async function(req, res) {
-
-    const newPS = new PersonajeService();
-
-    res.send(await newPS.insertPeSe())
+    const newPS = new PeliserieService();
+    let id = req.params.id;
+    res.send(await newPS.getByIdPeSe(id))
 
 })
 
-app.get('/personaje', async function(req, res) {
+app.get('/peliserie/titulo/:titulo', async function(req, res) {
 
-    const newPS = new PersonajeService();
-
-    res.send(await newPS.updatePeSe())
-
-})
-
-app.get('/personaje', async function(req, res) {
-
-    const newPS = new PersonajeService();
-
-    res.send(await newPS.deleteByIdPeSe())
+    const newPS = new PeliserieService();
+    let titulo = req.params.titulo;
+    let año = req.params.titulo;
+    res.send(await newPS.getByTituloPeSe(titulo))
 
 })
 
-app.get('/personaje', async function(req, res) {
+app.get('/update-pese/:id', async function(req, res) {
 
-    const newPS = new PersonajeService();
-
-    res.send(await newPS.getByNombrePer())
+    const newPS = new PeliserieService();
+    let id =req.params.id;
+    res.send(await newPS.updatePeSe(id))
 
 })
 
-app.get('/personaje', async function(req, res) {
+app.get('/delete-pese/:id', async function(req, res) {
 
-    const newPS = new PersonajeService();
-
-    res.send(await newPS.getByTituloPeSe())
+    const newPS = new PeliserieService();
+    let id =req.params.id;
+    res.send(await newPS.deleteByIdPeSe(id))
 
 })
 

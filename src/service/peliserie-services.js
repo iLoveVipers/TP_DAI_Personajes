@@ -90,15 +90,15 @@ class PeliserieService {
     }
 
     
-    getByTituloPeSe = async (titulo, fecha) => {
+    getByTituloPeSe = async (titulo) => {
         let returnEntity = null;
-        console.log('Estoy en: PeliserieService.getByTitulo(titulo, fecha)');
+        console.log('Estoy en: PeliserieService.getByTitulo(titulo)');
         try {
             let pool   = await sql.connect(config);
             let result = await pool.request()
                                 .input('pTitulo', sql.VarChar, titulo)
-                                .input('pFecha_Creacion', sql.Date, fecha)
-                                .query('SELECT * FROM Peliserie WHERE Titulo = @pTitulo AND  Fecha_Creacion = @pFecha_Creacion');
+                    
+                                .query('SELECT * FROM Peliserie WHERE Titulo = @pTitulo');
             returnEntity = result.recordsets[0][0];
         } catch (error) {
             console.log(error);
