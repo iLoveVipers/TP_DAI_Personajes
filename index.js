@@ -60,10 +60,19 @@ app.get('/instert-pj/:imagen/:nombre/:edad/:peso/:historia', async function(req,
 })
 
 app.get('/update-pj/:id', async function(req, res) {
-
+    console.log('Estoy en: ?');
     const newPS = new PersonajeService();
     let id =req.params.id;
-    res.send(await newPS.updatePer(id))
+    //console.log(Personaje(id))
+    let  pj = await newPS.getByIdPer(id)
+    if(pj != null){
+        const newUpdatedPj = {imagen: "0", nombre: "SofiaCacharo", edad: 16, peso: 1, historia: "Es muy tonta", }
+        res.send(await newPS.updatePer(newUpdatedPj))
+    }
+    else{
+        console.log("El personaje no existe")
+    }
+    
 
 })
 

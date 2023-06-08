@@ -54,14 +54,14 @@ class PersonajeService {
         return rowsAffected;
     }
 
-    updatePer = async (id) => {
+    updatePer = async (nombre, imagen, edad, peso, historia) => {
         let rowsAffected = 0;
         console.log('Estoy en: PersonajeService.update(personaje)');
 
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('pImagen'     , sql.NChar , personaje?.imagen ?? '')
+                .input('pImagen'     , sql.NChar , personaje.imagen ?? '')
                 .input('pNombre'     , sql.NChar , personaje?.nombre ?? '')
                 .input('pEdad'    , sql.Float , personaje?.edad ?? 0)
                 .input('pPeso'    , sql.Float , personaje?.peso ?? 0)
