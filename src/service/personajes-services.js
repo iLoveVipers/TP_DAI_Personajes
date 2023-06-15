@@ -54,7 +54,7 @@ class PersonajeService {
         return rowsAffected;
     }
 
-    updatePer = async (nombre, imagen, edad, peso, historia) => {
+    updatePer = async (personaje) => {
         let rowsAffected = 0;
         console.log('Estoy en: PersonajeService.update(personaje)');
 
