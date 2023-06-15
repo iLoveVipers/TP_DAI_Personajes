@@ -45,7 +45,7 @@ class PersonajeService {
                 .input('pEdad'    , sql.Float , personaje?.edad ?? 0)
                 .input('pPeso'    , sql.Float , personaje?.peso ?? 0)
                 .input('pHistoria', sql.NChar , personaje?.historia ?? '')
-                .query(`INSERT INTO Personaje (Imagen, Nombre, Edad, Peso, Historia) VALUES (@pImagen = 'NULL', @pNombre = 'EQUIS', @pEdad = 18 , @pPeso = 55, @pHistoria = 'BLA BLA BLA')`);
+                .query(`INSERT INTO Personaje (Imagen, Nombre, Edad, Peso, Historia) VALUES (Nombre = @pNombre, Imagen=@pImagen, Edad=@pEdad, Peso=@pPeso, Historia=@pHistoria)`);
             rowsAffected = result.rowsAffected;
         } catch (error) {
 
@@ -82,7 +82,7 @@ class PersonajeService {
             let pool   = await sql.connect(config);
             let result = await pool.request()
                                 .input('pId', sql.Int, id)
-                                .query('DELETE FROM Personajes WHERE id = @pId');
+                                .query('DELETE FROM Personaje WHERE id = @pId');
             rowsAffected = result.rowsAffected;
         } catch (error) {
             console.log(error);

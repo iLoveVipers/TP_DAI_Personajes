@@ -25,8 +25,6 @@ app.get('/', function(req, res) {
 })
 
 
- 
-
 app.get('/personaje', async function(req, res) {
 
     const newPS = new PersonajeService();
@@ -34,7 +32,6 @@ app.get('/personaje', async function(req, res) {
     res.send(await newPS.getAllPer())
 
 })
-
 app.get('/personaje/:id', async function(req, res) {
 
     const newPS = new PersonajeService();
@@ -51,10 +48,10 @@ app.get('/personaje/nombre/:nombre', async function(req, res) {
 
 })
 
-app.get('/instert-pj/:imagen/:nombre/:edad/:peso/:historia', async function(req, res) {
+app.get('/insert-pj', async function(req, res) {
 
     const newPS = new PersonajeService();
-    const newPer = {imagen:req.params.imagen, nombre:req.params.nombre, edad:req.params.edad, peso:req.params.peso, historia:req.params.historia,}
+    const newPer = {imagen: 0, nombre: "Martina Guy", edad: 5, peso: 2, historia:"Es una boluda",}
     res.send(await newPS.insertPer(newPer))
 
 })
